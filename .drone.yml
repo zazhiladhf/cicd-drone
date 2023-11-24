@@ -3,13 +3,27 @@ type: docker
 name: default
 
 steps:
-- name: test
-  image: golang:1.19
+
+- name: tests
+  image: golang
+  environment:
+    DB_HOST: db
+    DB_PORT: 5432
+    DB_USER: noobee
+    DB_PASS: noobee
+    DB_NAME: noobee
+  depends_on:
+    - db
   commands:
-    - make run-test
-  # when:
-  #    event:
-  #    - push
+  - sh test.sh
+
+services:
+- name: db
+  image: postgres
+  environment:
+    POSTGRES_PASSWORD: noobee
+    POSTGRES_USER: noobee
+    POSTGRES_DB: noobee
 
 trigger:
   branch:
