@@ -7,6 +7,9 @@ steps:
   image: golang:1.19
   commands:
     - make run-test
+  when:
+     event:
+     - push
 
 trigger:
   branch:
