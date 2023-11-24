@@ -10,6 +10,7 @@ steps:
 
 trigger:
   branch:
-    - main
+  - master
+  - main
   event:
-    - push
+  - push
