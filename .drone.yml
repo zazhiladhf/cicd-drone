@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: nbid ci/cd example
+name: nbid example
 
 steps:
 - name: test
