@@ -4,6 +4,7 @@ name: default
 
 steps:
 
+# for unit testing
 - name: tests
   image: golang
   environment:
@@ -17,6 +18,7 @@ steps:
   commands:
   - make run-test
 
+# for build image docker
 - name : build
   image: plugins/docker
   settings: 
