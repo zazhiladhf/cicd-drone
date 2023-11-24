@@ -15,7 +15,7 @@ steps:
   depends_on:
     - db
   commands:
-  - sh test.sh
+  - make run-test
 
 services:
 - name: db
