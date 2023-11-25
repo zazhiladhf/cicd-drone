@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: container test and build
+name: container-test-and-build
 
 steps:
 
@@ -69,4 +69,4 @@ steps:
       - push
 
 depends_on:
-  - "container test and buil"
+  - container-test-and-build
