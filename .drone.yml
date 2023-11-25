@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: default
+name: container test and build
 
 steps:
 
@@ -32,6 +32,7 @@ steps:
   when:
     event:
     - tag
+    - push
   depends_on:
     - tests
 
@@ -49,3 +50,23 @@ trigger:
   event:
   - push
   - tag
+
+---
+kind: pipeline
+type: docker
+name: deploy
+
+steps:
+  - name: deploy
+    image: plugins/docker
+    settings: 
+      repo: achimonchi/drone-test
+    commands:
+      - ls
+    when:
+      event:
+      - tag
+      - push
+
+depends_on:
+  - "container test and buil"
