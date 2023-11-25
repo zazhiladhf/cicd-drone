@@ -57,16 +57,16 @@ type: docker
 name: deploy
 
 steps:
-  - name: deploy
-    image: plugins/docker
-    settings: 
-      repo: achimonchi/drone-test
-    commands:
-      - ls
-    when:
-      event:
-      - tag
-      - push
+- name: deploy
+  image: plugins/docker
+  settings: 
+    repo: achimonchi/drone-test
+  commands:
+    - ls
+  when:
+    event:
+    - tag
+    - push
 
 depends_on:
-  - container-test-and-build
+- container-test-and-build
