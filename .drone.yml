@@ -32,6 +32,8 @@ steps:
   when:
     event:
     - tag
+  depends_on:
+    - tests
 
 services:
 - name: db
