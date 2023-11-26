@@ -180,5 +180,6 @@ steps:
     script:
       - cd app
       - make run-golang-drone-app
+      
 depends_on:
 - container-test-and-build
