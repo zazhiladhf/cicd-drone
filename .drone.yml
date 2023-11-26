@@ -109,6 +109,24 @@ steps:
   # biasanya diisi dengan running unit test, atau menjalankan docker run
   commands:
   - make run-test
+  
+# for build image docker
+- name : build
+  image: plugins/docker
+  settings: 
+    repo: achimonchi/drone-test
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    tags: latest
+    dockerfile: Multistage-Alpine-Dockerfile
+  when:
+    event:
+    - tag
+    - push
+  depends_on:
+    - tests
 
 # untuk nge-running services database
 services:
