@@ -129,6 +129,29 @@ steps:
     - tests
 
 
+# untuk nge-running services database
+services:
+  # membuat services databse dengan nama `db`
+- name: db
+  # menggunakan image postgres, karena DB yang digunakan pada golang apps
+  # kita adalah postgres
+  image: postgres
+  # setup environment variable
+  environment:
+    POSTGRES_PASSWORD: noobee
+    POSTGRES_USER: noobee
+    POSTGRES_DB: noobee
+
+# trigger drone saat ada event push pada branch master
+# kita bisa setup trigger dengan branch, atau event, atau branch dan event
+# pada kasus kali ini, kita menggunakan branch dan event
+trigger:
+  branch:
+  - main
+  event:
+  - push
+
+
 # pisah antar pipeline menggunakan garis 3
 ---
 # pipeline CD
@@ -161,25 +184,3 @@ steps:
         achimonchi/nbid-intermediate-drone
 depends_on:
 - container-test-and-build
-
-# untuk nge-running services database
-services:
-  # membuat services databse dengan nama `db`
-- name: db
-  # menggunakan image postgres, karena DB yang digunakan pada golang apps
-  # kita adalah postgres
-  image: postgres
-  # setup environment variable
-  environment:
-    POSTGRES_PASSWORD: noobee
-    POSTGRES_USER: noobee
-    POSTGRES_DB: noobee
-
-# trigger drone saat ada event push pada branch master
-# kita bisa setup trigger dengan branch, atau event, atau branch dan event
-# pada kasus kali ini, kita menggunakan branch dan event
-trigger:
-  branch:
-  - main
-  event:
-  - push
