@@ -128,6 +128,40 @@ steps:
   depends_on:
     - tests
 
+
+# pisah antar pipeline menggunakan garis 3
+---
+# pipeline CD
+kind: pipeline
+type: docker
+name: deploy
+
+steps:
+# nama step
+- name: deploy to server
+  # menggunakan image drone-ssh agar bisa melakukan ssh ke server
+  image: appleboy/drone-ssh
+  # setting drone ssh
+  settings:
+    host:
+      - ssh_server
+    username: 
+      from_secret: ssh_username
+    password:
+      from_secret: ssh_password
+    port: 22
+    command_timeout: 2m
+    script:
+      - docker run -d --name nbid-drone-tests --network=host  \
+        -e DB_HOST=localhost \
+        -e DB_PORT=5432 \
+        -e DB_USER=postgres \
+        -e DB_PASS=admin \
+        -e DB_NAME=noobeeid \
+        achimonchi/nbid-intermediate-drone
+depends_on:
+- container-test-and-build
+
 # untuk nge-running services database
 services:
   # membuat services databse dengan nama `db`
