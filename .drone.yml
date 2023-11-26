@@ -167,7 +167,7 @@ steps:
   # setting drone ssh
   settings:
     host:
-      - ssh_server
+      - 103.59.95.233
     username: 
       from_secret: ssh_username
     password:
