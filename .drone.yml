@@ -159,6 +159,9 @@ kind: pipeline
 type: docker
 name: deploy
 
+clone:
+  disable: true
+
 steps:
 # nama step
 - name: deploy to server
