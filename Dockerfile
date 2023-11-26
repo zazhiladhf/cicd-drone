@@ -1,9 +1,15 @@
-FROM golang
+FROM golang as builder
 
 WORKDIR /apps
 
 COPY . .
 
-RUN go build -o main main.go
+RUN CGO_ENABLED=0 go build -ldflags="-w -s" -o main main.go
+
+FROM alpine
+
+WORKDIR /apps
+
+COPY --from=builder /apps/main . 
 
 CMD [ "./main" ]
